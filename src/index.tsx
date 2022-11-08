@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Root } from './components/Root';
+import { Root } from '@pkdx-components/Root';
 
 function getRootElement() {
   const existing_el = document.getElementById('root');

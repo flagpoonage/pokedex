@@ -8,7 +8,7 @@
   "scripts": {
     "build-dev": "yarn clean && yarn typecheck && yarn bundle-dev && yarn postcss-dev",
     "dev": "yarn clean && concurrently --names server,css,types,js -c green.bold,yellow.bold,red.bold,blue.bold --kill-others yarn:dev-server yarn:postcss-watch yarn:typecheck-watch yarn:bundle-watch",
-    "typecheck": "tsc src/index.tsx --moduleResolution node --resolveJsonModule --noEmit --jsx react-jsx --esModuleInterop --target es2022",
+    "typecheck": "tsc --project tsconfig.check.json",
     "typecheck-watch": "yarn typecheck --watch --preserveWatchOutput",
     "postcss": "postcss css/index.css --verbose -u postcss-import -u postcss-nested  --map",
     "postcss-dev": "yarn postcss -o serve/dist/bundle.css",
@@ -17,9 +17,11 @@
     "bundle-watch": "node scripts/bundle.js --watch",
     "dev-server": "PORT=3002 live-server serve --host=localhost",
     "clean": "rimraf serve/dist",
+    "test": "jest",
     "lint": "eslint ./src/**"
   },
   "devDependencies": {
+    "@types/jest": "^29.2.2",
     "@types/node": "^18.0.5",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
@@ -30,9 +32,11 @@
     "cssnano": "^5.1.13",
     "esbuild": "^0.14.49",
     "eslint": "^8.19.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.3.0",
     "live-server": "1.2.1",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
@@ -42,6 +46,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   }
