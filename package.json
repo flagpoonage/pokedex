@@ -6,7 +6,7 @@
   "author": "James <pokinoice@live.com>",
   "license": "MIT",
   "scripts": {
-    "build-dev": "yarn clean && yarn typecheck && yarn bundle && yarn postcss-dev",
+    "build-dev": "yarn clean && yarn typecheck && yarn bundle-dev && yarn postcss-dev",
     "dev": "yarn clean && concurrently --names server,css,types,js -c green.bold,yellow.bold,red.bold,blue.bold --kill-others yarn:dev-server yarn:postcss-watch yarn:typecheck-watch yarn:bundle-watch",
     "typecheck": "tsc src/index.tsx --moduleResolution node --resolveJsonModule --noEmit --jsx react-jsx --esModuleInterop --target es2022",
     "typecheck-watch": "yarn typecheck --watch --preserveWatchOutput",
@@ -16,7 +16,6 @@
     "bundle-dev": "node scripts/bundle.js",
     "bundle-watch": "node scripts/bundle.js --watch",
     "dev-server": "PORT=3002 live-server serve --host=localhost",
-    "bundle": "esbuild src/index.tsx --bundle --sourcemap --platform=browser --color=true",
     "clean": "rimraf serve/dist",
     "lint": "eslint ./src/**"
   },
