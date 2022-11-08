@@ -6,6 +6,7 @@
   "author": "James <pokinoice@live.com>",
   "license": "MIT",
   "scripts": {
+    "build-dev": "yarn clean && yarn typecheck && yarn bundle && yarn postcss-dev",
     "dev": "yarn clean && concurrently --names server,css,types,js -c green.bold,yellow.bold,red.bold,blue.bold --kill-others yarn:dev-server yarn:postcss-watch yarn:typecheck-watch yarn:bundle-watch",
     "typecheck": "tsc src/index.ts --moduleResolution node --resolveJsonModule --noEmit --jsx react-jsx --esModuleInterop --target es2022",
     "typecheck-watch": "yarn typecheck --watch --preserveWatchOutput",
