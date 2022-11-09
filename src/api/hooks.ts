@@ -39,7 +39,8 @@ export function usePokemonListing(pageSize: number) {
 
     setCurrentState((state) => ({
       ...state,
-      complete: false,
+      status: 'none',
+      pageSize: pageSize,
       page: 1,
       error: null,
     }));

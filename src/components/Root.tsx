@@ -1,9 +1,11 @@
 import { usePokemonListing } from '@pkdx-api/hooks';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 export function Root() {
+  const [pageSize, setPageSize] = useState(20);
+
   const { data, page, pageCount, nextPage, prevPage, goToPage } =
-    usePokemonListing(20);
+    usePokemonListing(pageSize);
 
   const pages = useMemo(
     () =>
@@ -29,6 +31,18 @@ export function Root() {
 
   return (
     <div>
+      <div>
+        <select
+          onChange={(v) => setPageSize(Number(v.currentTarget.value))}
+          value={pageSize}
+        >
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+          <option value={40}>40</option>
+          <option value={50}>50</option>
+        </select>
+      </div>
       {data.map((a) => (
         <div key={`pokemon_${a.id}`}>
           <img
