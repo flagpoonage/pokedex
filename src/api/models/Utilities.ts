@@ -16,6 +16,17 @@ export interface BaseResource {
 }
 
 /**
+ * A type not specified in the API but inherited by many other types
+ * which contain a list of their names in different languages.
+ */
+export interface ResourceWithNames {
+  /**
+   * The name of this resource listed in different languages.
+   */
+  names: Name[];
+}
+
+/**
  * Described in https://pokeapi.co/docs/v2#apiresource
  */
 export interface APIResource {
@@ -184,4 +195,72 @@ export interface MachineVersionDetail {
    * The version group of this specific machine.
    */
   version_group: NamedAPIResource;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#description
+ */
+export interface Description {
+  /**
+   * The localized description for an API resource in a specific language.
+   */
+  description: string;
+  /**
+   * The language this name is in.
+   */
+  language: NamedAPIResource;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#flavortext
+ */
+export interface FlavorText {
+  /**
+   * The localized flavor text for an API resource in a specific language.
+   * Note that this text is left unprocessed as it is found in game files.
+   * This means that it contains special characters that one might want to
+   * replace with their visible decodable version. Please check out
+   * {@link https://github.com/veekun/pokedex/issues/218#issuecomment-339841781 this}
+   * issue to find out more.
+   */
+  flavor_text: string;
+  /**
+   * The language this name is in.
+   */
+  language: NamedAPIResource;
+  /**
+   * The game version this flavor text is extracted from.
+   */
+  version: NamedAPIResource;
+}
+
+/**
+ * Version groups categorize highly similar versions of the games.
+ */
+export interface VersionGroup extends BaseResource {
+  /**
+   * Order for sorting. Almost by date of release, except similar versions
+   * are grouped together.
+   */
+  order: number;
+  /**
+   * The generation this version was introduced in.
+   */
+  generation: NamedAPIResource;
+  /**
+   * A list of methods in which Pokémon can learn moves in this version group.
+   */
+  move_learn_methods: NamedAPIResource[];
+  /**
+   * A list of Pokédexes introduces in this version group.
+   */
+  pokedexes: NamedAPIResource[];
+  /**
+   * A list of regions that can be visited in this version group.
+   */
+  regions: NamedAPIResource[];
+  /**
+   * The versions this version group owns.
+   */
+  versions: NamedAPIResource[];
 }

@@ -3,8 +3,9 @@ import {
   Effect,
   Name,
   NamedAPIResource,
+  ResourceWithNames,
   VerboseEffect,
-} from './Utilities';
+} from '../Utilities';
 
 /**
  * Abilities provide passive effects for Pokémon in battle or in the overworld.
@@ -12,7 +13,7 @@ import {
  * time. Check out {@link http://bulbapedia.bulbagarden.net/wiki/Ability Bulbapedia}
  * for greater detail.
  */
-export interface Ability extends BaseResource {
+export interface Ability extends BaseResource, ResourceWithNames {
   /**
    * Whether or not this ability originated in the main series of the video games.
    */
@@ -21,10 +22,6 @@ export interface Ability extends BaseResource {
    * The generation this ability originated in.
    */
   generation: NamedAPIResource;
-  /**
-   * The name of this resource listed in different languages.
-   */
-  names: Name[];
   /**
    * The effect of this ability listed in different languages.
    */

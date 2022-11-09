@@ -45,32 +45,32 @@ export class PokemonAPICache<T> {
   }
 }
 
-type UseCachedItemResultError = {
+type UseCachedResourceResultError = {
   state: 'error';
   error: Error;
 };
 
-type UseCachedItemResultLoading<T> = {
+type UseCachedResourceResultLoading<T> = {
   state: 'loading';
 };
 
-type UseCachedItemResultData<T> = {
+type UseCachedResourceResultData<T> = {
   state: 'complete';
   data: T;
 };
 
-export type UseCachedItemResult<T> = (
-  | UseCachedItemResultError
-  | UseCachedItemResultLoading<T>
-  | UseCachedItemResultData<T>
+export type UseCachedResourceResult<T> = (
+  | UseCachedResourceResultError
+  | UseCachedResourceResultLoading<T>
+  | UseCachedResourceResultData<T>
 ) & {
   refresh: () => void;
 };
 
-export function useCachedItem<T>(
+export function useCachedResource<T>(
   id: string,
   cache: PokemonAPICache<T>
-): UseCachedItemResult<T> {
+): UseCachedResourceResult<T> {
   const [data, setData] = useState<{
     data: T | Error | null;
     loading: boolean;
