@@ -30,50 +30,54 @@ export function Root() {
   );
 
   return (
-    <div>
+    <div className="flex x">
       <div>
-        <select
-          onChange={(v) => setPageSize(Number(v.currentTarget.value))}
-          value={pageSize}
-        >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={30}>30</option>
-          <option value={40}>40</option>
-          <option value={50}>50</option>
-        </select>
-      </div>
-      {data.map((a) => (
-        <div key={`pokemon_${a.id}`}>
-          <img
-            width="50"
-            height="50"
-            alt="?"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${a.id}.png`}
-          />
-          <span>{`ID: ${a.id}`}</span>
-          <span>{`Name: ${a.name}`}</span>
-        </div>
-      ))}
-      {pageCount && (
         <div>
-          <button disabled={page <= 1} onClick={prevPage}>
-            Previous
-          </button>
-          {pages.map((a) => (
-            <button
-              onClick={onSelectPage}
-              data-pagenumber={a}
-              key={`page_${a}`}
-            >
-              {a}
-            </button>
-          ))}
-          <button disabled={pageCount <= page} onClick={nextPage}>
-            Next
-          </button>
+          <select
+            onChange={(v) => setPageSize(Number(v.currentTarget.value))}
+            value={pageSize}
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={30}>30</option>
+            <option value={40}>40</option>
+            <option value={50}>50</option>
+          </select>
         </div>
-      )}
+        {data.map((a) => (
+          <div key={`pokemon_${a.id}`}>
+            <img
+              width="50"
+              height="50"
+              alt="?"
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${a.id}.png`}
+            />
+            <span>{`ID: ${a.id}`}</span>
+            <span>{`Name: ${a.name}`}</span>
+            <button data-pokemonid={a.id}>Load</button>
+          </div>
+        ))}
+        {pageCount && (
+          <div>
+            <button disabled={page <= 1} onClick={prevPage}>
+              Previous
+            </button>
+            {pages.map((a) => (
+              <button
+                onClick={onSelectPage}
+                data-pagenumber={a}
+                key={`page_${a}`}
+              >
+                {a}
+              </button>
+            ))}
+            <button disabled={pageCount <= page} onClick={nextPage}>
+              Next
+            </button>
+          </div>
+        )}
+      </div>
+      <div>Lol</div>
     </div>
   );
 }

@@ -1,14 +1,13 @@
 import { UnexpectedDataError } from '@pkdx-utils/errors';
 import { useCallback, useEffect, useState } from 'react';
 import { getPokemonListingUrl } from './endpoints';
+import { PaginationResult, isPaginationResult } from './models/Pagination';
 import {
-  extractPokemonListingWithID,
-  isPaginationResult,
-  isPokemonListing,
-  PaginationResult,
-  PokemonListing,
-  PokemonListingWithID,
-} from './types';
+  NamedAPIResourceWithID,
+  NamedAPIResource,
+  isNamedAPIResource,
+  extractNamedAPIResourceWithID,
+} from './models/Utilities';
 
 type LoadingStatus = 'none' | 'loading' | 'complete' | 'error';
 
@@ -22,7 +21,7 @@ interface LoadingState {
 
 export function usePokemonListing(pageSize: number) {
   const [data, setData] =
-    useState<PaginationResult<PokemonListingWithID> | null>(null);
+    useState<PaginationResult<NamedAPIResourceWithID> | null>(null);
 
   const [currentState, setCurrentState] = useState<LoadingState>({
     error: null,
@@ -82,8 +81,8 @@ export function usePokemonListing(pageSize: number) {
           );
         }
 
-        const validPokemon = json.results.filter((a): a is PokemonListing => {
-          const valid = isPokemonListing(a);
+        const validPokemon = json.results.filter((a): a is NamedAPIResource => {
+          const valid = isNamedAPIResource(a);
           if (!valid) {
             console.warn(`Hiding displaying invalid pokemon listing`, a);
           }
@@ -91,8 +90,10 @@ export function usePokemonListing(pageSize: number) {
           return valid;
         });
 
-        json.results = validPokemon.map((a) => extractPokemonListingWithID(a));
-        setData(json as PaginationResult<PokemonListingWithID>);
+        json.results = validPokemon.map((a) =>
+          extractNamedAPIResourceWithID(a)
+        );
+        setData(json as PaginationResult<NamedAPIResourceWithID>);
         setCurrentState((state) => ({
           ...state,
 

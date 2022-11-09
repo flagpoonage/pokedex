@@ -14,7 +14,7 @@ export function attachPaginationQuery(url: string, query?: PaginationQuery) {
     return url;
   }
 
-  const params = [];
+  const params: string[] = [];
 
   if (query.offset) {
     params.push(`offset=${query.offset}`);
@@ -55,46 +55,4 @@ export function isPaginationResult(
     (v.previous === null || typeof v.previous === 'string') &&
     Array.isArray(v.results)
   );
-}
-
-export interface PokemonListing {
-  name: string;
-  url: string;
-}
-
-export interface PokemonListingWithID extends PokemonListing {
-  id: number;
-}
-
-/**
- * Extracts the pokemon ID from the listing URL if available. When not
- * available, the ID will be returned as `0`.
- * @param listing The pokemon listing
- * @returns A new copy of the listing with a numeric ID attached
- */
-export function extractPokemonListingWithID(
-  listing: PokemonListing
-): PokemonListingWithID {
-  const id = Number(listing.url.match(/^.+\/(.+)\/$/)?.[1]);
-
-  return {
-    ...listing,
-    id: isNaN(id) ? 0 : id,
-  };
-}
-
-/**
- * Returns a type assertion boolean for whether the provided value is
- * a type of {@link PokemonListing}
- * @param value Any value
- * @returns A type asserting boolean
- */
-export function isPokemonListing(value: unknown): value is PokemonListing {
-  if (!value || Array.isArray(value) || typeof value !== 'object') {
-    return false;
-  }
-
-  const v = value as PokemonListing;
-
-  return typeof v.name === 'string' && typeof v.url === 'string';
 }
