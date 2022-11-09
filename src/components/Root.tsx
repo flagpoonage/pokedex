@@ -31,6 +31,12 @@ export function Root() {
     <div>
       {data.map((a) => (
         <div key={`pokemon_${a.id}`}>
+          <img
+            width="50"
+            height="50"
+            alt="?"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${a.id}.png`}
+          />
           <span>{`ID: ${a.id}`}</span>
           <span>{`Name: ${a.name}`}</span>
         </div>
