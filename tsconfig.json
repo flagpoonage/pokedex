@@ -15,7 +15,8 @@
     "baseUrl": "./",
     "paths": {
       "@pkdx-utils/*": ["src/utils/*"],
-      "@pkdx-components/*": ["src/components/*"]
+      "@pkdx-components/*": ["src/components/*"],
+      "@pkdx-api/*": ["src/api/*"]
     }
   },
   "include": ["./src", "./tests"]

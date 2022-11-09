@@ -17,5 +17,9 @@ function getRootElement() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(getRootElement());
-  root.render(<Root />);
+  root.render(
+    <React.StrictMode>
+      <Root />
+    </React.StrictMode>
+  );
 });
