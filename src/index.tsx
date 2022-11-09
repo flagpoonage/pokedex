@@ -1,6 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Root } from '@pkdx-components/Root';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
+import { PokemonView } from '@pkdx-components/dev/Pokemon';
 
 function getRootElement() {
   const existing_el = document.getElementById('root');
@@ -15,11 +22,19 @@ function getRootElement() {
   return new_el;
 }
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route path="/pokemon/:pokemon_name" element={<PokemonView />} />
+    </Route>
+  )
+);
+
 document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(getRootElement());
   root.render(
     <React.StrictMode>
-      <Root />
+      <RouterProvider router={router} />
     </React.StrictMode>
   );
 });

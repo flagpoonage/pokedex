@@ -1,5 +1,7 @@
 import { usePokemonListing } from '@pkdx-api/hooks';
 import React, { useCallback, useMemo, useState } from 'react';
+import { Route, Routes, Link, Outlet } from 'react-router-dom';
+import { PokemonView } from './dev/Pokemon';
 
 export function Root() {
   const [pageSize, setPageSize] = useState(20);
@@ -54,7 +56,7 @@ export function Root() {
             />
             <span>{`ID: ${a.id}`}</span>
             <span>{`Name: ${a.name}`}</span>
-            <button data-pokemonid={a.id}>Load</button>
+            <Link to={`/pokemon/${a.name}`}>Load</Link>
           </div>
         ))}
         {pageCount && (
@@ -77,7 +79,7 @@ export function Root() {
           </div>
         )}
       </div>
-      <div>Lol</div>
+      <Outlet />
     </div>
   );
 }

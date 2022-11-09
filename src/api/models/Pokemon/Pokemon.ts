@@ -74,7 +74,7 @@ export interface PokemonAbility {
  */
 export interface PokemonType {
   /**
-   * The slot this ability occupies in this Pokémon species.
+   * The order the Pokémon's types are listed in.
    */
   slot: number;
   /**

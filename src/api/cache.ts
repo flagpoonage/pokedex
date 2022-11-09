@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export class PokemonAPICache<T> {
   private _items: Map<string, T> = new Map();
@@ -9,7 +9,11 @@ export class PokemonAPICache<T> {
     this._urlGenerator = urlGenerator;
   }
 
-  async get(id: string): Promise<T> {
+  get(id: string): T | null {
+    return this._items.get(id) ?? null;
+  }
+
+  async load(id: string): Promise<T> {
     const existing = this._items.get(id);
 
     if (existing) {
@@ -32,6 +36,7 @@ export class PokemonAPICache<T> {
       const result = await fetch(this._urlGenerator(id));
       const json = await result.json();
 
+      this._items.set(id, json);
       this._requests.delete(id);
       return json;
     } catch (exception) {
@@ -71,11 +76,12 @@ export function useCachedResource<T>(
   id: string,
   cache: PokemonAPICache<T>
 ): UseCachedResourceResult<T> {
+  const loaded_id = useRef(id);
   const [data, setData] = useState<{
     data: T | Error | null;
     loading: boolean;
   }>({
-    data: null,
+    data: cache.get(id),
     loading: false,
   });
 
@@ -86,7 +92,7 @@ export function useCachedResource<T>(
 
     (async () => {
       try {
-        const item = await cache.get(id);
+        const item = await cache.load(id);
         setData({ data: item, loading: false });
       } catch (exception) {
         const ex =
@@ -99,6 +105,18 @@ export function useCachedResource<T>(
   const refresh = useCallback(() => {
     setData({ data: null, loading: false });
   }, []);
+
+  useEffect(() => {
+    if (id !== loaded_id.current) {
+      loaded_id.current = id;
+      const cached = cache.get(id);
+      if (cached) {
+        setData({ data: cached, loading: false });
+      } else {
+        refresh();
+      }
+    }
+  }, [id, refresh]);
 
   if (!data.data) {
     return {
