@@ -26,7 +26,7 @@ describe('api/endpoints', () => {
 
   describe('getPokemonDetailsUrl()', () => {
     it('Returns the pokemon details URL with the id or name provided', () => {
-      expect(getPokemonDetailsUrl(123)).toBe(
+      expect(getPokemonDetailsUrl('123')).toBe(
         'https://pokeapi.co/api/v2/pokemon/123/'
       );
       expect(getPokemonDetailsUrl('squirtle')).toBe(

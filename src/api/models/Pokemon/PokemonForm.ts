@@ -1,10 +1,5 @@
 import { PokemonFormType } from './Pokemon';
-import {
-  BaseResource,
-  Name,
-  NamedAPIResource,
-  VersionGroup,
-} from '../Utilities';
+import { BaseResource, Name, NamedAPIResource } from '../Utilities';
 
 /**
  * Some Pokémon may appear in one of multiple, visually different forms.
@@ -54,7 +49,7 @@ export interface PokemonForm extends BaseResource {
   /**
    * The version group this Pokémon form was introduced in.
    */
-  version_group: VersionGroup;
+  version_group: NamedAPIResource;
   /**
    * The form specific full name of this Pokémon form, or empty if the
    * form does not have a specific name.

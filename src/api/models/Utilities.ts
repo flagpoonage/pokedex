@@ -1,4 +1,4 @@
-import { VersionGroup } from './VersionGroup';
+import { VersionGroup } from './Games/VersionGroup';
 
 /**
  * A base resource that all pokedex resources inherit from,
@@ -24,6 +24,17 @@ export interface ResourceWithNames {
    * The name of this resource listed in different languages.
    */
   names: Name[];
+}
+
+/**
+ * A type not specified in the API but inherited by many other types
+ * which contains a list of their descriptions in different languages.
+ */
+export interface ResourceWithDescriptions {
+  /**
+   * The description of this resource listed in different languages.
+   */
+  descriptions: Description[];
 }
 
 /**
@@ -235,32 +246,45 @@ export interface FlavorText {
 }
 
 /**
- * Version groups categorize highly similar versions of the games.
+ * Described in https://pokeapi.co/docs/v2#encounter
  */
-export interface VersionGroup extends BaseResource {
+export interface Encounter {
   /**
-   * Order for sorting. Almost by date of release, except similar versions
-   * are grouped together.
+   * The lowest level the Pokémon could be encountered at.
    */
-  order: number;
+  min_level: number;
   /**
-   * The generation this version was introduced in.
+   * The highest level the Pokémon could be encountered at.
    */
-  generation: NamedAPIResource;
+  max_level: number;
   /**
-   * A list of methods in which Pokémon can learn moves in this version group.
+   * A list of condition values that must be in effect for this encounter to occur.
    */
-  move_learn_methods: NamedAPIResource[];
+  condition_values: NamedAPIResource[];
   /**
-   * A list of Pokédexes introduces in this version group.
+   * Percent chance that this encounter will occur.
    */
-  pokedexes: NamedAPIResource[];
+  chance: number;
   /**
-   * A list of regions that can be visited in this version group.
+   * The method by which this encounter happens.
    */
-  regions: NamedAPIResource[];
+  method: NamedAPIResource;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#versionencounterdetail
+ */
+export interface VersionEncounterDetail {
   /**
-   * The versions this version group owns.
+   * The game version this encounter happens in.
    */
-  versions: NamedAPIResource[];
+  version: NamedAPIResource;
+  /**
+   * The total percentage of all encounter potential.
+   */
+  max_chance: number;
+  /**
+   * A list of encounters and their specifics.
+   */
+  encounter_details: Encounter[];
 }

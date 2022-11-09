@@ -1,7 +1,6 @@
 import {
   BaseResource,
   Effect,
-  Name,
   NamedAPIResource,
   ResourceWithNames,
   VerboseEffect,

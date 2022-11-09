@@ -51,7 +51,7 @@ export interface Pokemon extends BaseResource {
   sprites: PokemonSprites;
   species: NamedAPIResource;
   stats: PokemonStat[];
-  types: PokemonTypeRelation[];
+  types: PokemonType[];
 }
 
 export interface PokemonAbility {
@@ -71,17 +71,8 @@ export interface PokemonAbility {
 
 /**
  * Described in https://pokeapi.co/docs/v2#pokemontype
- *
- * @note Originally this is named `PokemonType` in the docs, but there's also
- * a "Pokemon Type" which is just named `Type`, and that's not a great name.
- *
- * Named this way as this relates a "Pokemon" to a "Pokemon Type"
  */
-export interface PokemonTypeRelation {
-  /**
-   * Whether or not this is a hidden ability.
-   */
-  is_hidden: boolean;
+export interface PokemonType {
   /**
    * The slot this ability occupies in this Pokémon species.
    */
@@ -104,6 +95,20 @@ export interface PokemonFormType {
    * The type the referenced Form has.
    */
   type: NamedAPIResource;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#pokemontypepast
+ */
+export interface PokemonTypePast {
+  /**
+   * The last generation in which the referenced pokémon had the listed types.
+   */
+  generation: NamedAPIResource;
+  /**
+   * The types the referenced pokémon had up to and including the listed generation.
+   */
+  types: PokemonType[];
 }
 
 /**
@@ -132,4 +137,92 @@ export interface PokemonHeldItemVersion {
    * How often the item is held.
    */
   rarity: number;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#pokemonmove
+ */
+export interface PokemonMove {
+  /**
+   * The move the Pokémon can learn.
+   */
+  move: NamedAPIResource;
+  /**
+   * The details of the version in which the Pokémon can learn the move.
+   */
+  version_group_details: PokemonMoveVersion[];
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#pokemonmoveversion
+ */
+export interface PokemonMoveVersion {
+  /**
+   * The method by which the move is learned.
+   */
+  move_learn_method: NamedAPIResource;
+  /**
+   * The version group in which the move is learned.
+   */
+  version_group: NamedAPIResource;
+  /**
+   * The minimum level to learn the move.
+   */
+  level_learned_at: number;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#pokemonstat
+ */
+export interface PokemonStat {
+  /**
+   * The stat the Pokémon has.
+   */
+  stat: NamedAPIResource;
+  /**
+   * The effort points (EV) the Pokémon has in the stat.
+   */
+  effort: number;
+  /**
+   * The base value of the stat.
+   */
+  base_stat: number;
+}
+
+/**
+ * Described in https://pokeapi.co/docs/v2#pokemonsprites
+ */
+export interface PokemonSprites {
+  /**
+   * The default depiction of this Pokémon from the front in battle.
+   */
+  front_default: string;
+  /**
+   * The shiny depiction of this Pokémon from the front in battle.
+   */
+  front_shiny: string;
+  /**
+   * The female depiction of this Pokémon from the front in battle.
+   */
+  front_female: string;
+  /**
+   * The shiny female depiction of this Pokémon from the front in battle.
+   */
+  front_shiny_female: string;
+  /**
+   * The default depiction of this Pokémon from the back in battle.
+   */
+  back_default: string;
+  /**
+   * The shiny depiction of this Pokémon from the back in battle.
+   */
+  back_shiny: string;
+  /**
+   * The female depiction of this Pokémon from the back in battle.
+   */
+  back_female: string;
+  /**
+   * The shiny female depiction of this Pokémon from the back in battle.
+   */
+  back_shiny_female: string;
 }
