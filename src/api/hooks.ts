@@ -68,7 +68,10 @@ export function usePokemonListing(pageSize: number) {
           current_request: controller,
           status: 'loading',
         }));
-        const result = await fetch(next_url, { signal: controller.signal });
+
+        const result = await fetch(next_url, {
+          signal: controller.signal,
+        });
         const json = await result.json();
 
         if (!isPaginationResult(json)) {
@@ -96,6 +99,11 @@ export function usePokemonListing(pageSize: number) {
           status: 'complete',
         }));
       } catch (exception) {
+        if (exception instanceof DOMException && exception.ABORT_ERR) {
+          console.log('Request aborted');
+          return;
+        }
+
         const ex =
           exception instanceof Error ? exception : new Error(String(exception));
         setCurrentState((state) => ({
