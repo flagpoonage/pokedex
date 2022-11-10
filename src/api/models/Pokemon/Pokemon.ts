@@ -45,12 +45,37 @@ export interface Pokemon extends BaseResource {
    * A list of items this Pokémon may be holding when encountered.
    */
   held_items: PokemonHeldItem[];
+  /**
+   * A link to a list of location areas, as well as encounter details pertaining to
+   * specific versions.
+   */
   location_area_encounters: string;
+  /**
+   * A list of moves along with learn methods and level details pertaining to specific
+   * version groups.
+   */
   moves: PokemonMove[];
+  /**
+   * A list of details showing types this pokémon had in previous generations
+   */
   past_types: PokemonTypePast[];
+  /**
+   * A set of sprites used to depict this Pokémon in the game. A visual representation of
+   * the various sprites can be found at
+   * {@link https://github.com/PokeAPI/sprites#sprites PokeAPI/sprites}
+   */
   sprites: PokemonSprites;
+  /**
+   * The species this Pokémon belongs to.
+   */
   species: NamedAPIResource;
+  /**
+   * A list of base stat values for this Pokémon.
+   */
   stats: PokemonStat[];
+  /**
+   * A list of details showing types this Pokémon has.
+   */
   types: PokemonType[];
 }
 

@@ -19,7 +19,7 @@ interface LoadingState {
   page: number;
 }
 
-export function usePokemonListing(pageSize: number) {
+export function usePokemonListing(page: number, pageSize: number) {
   const [data, setData] =
     useState<PaginationResult<NamedAPIResourceWithID> | null>(null);
 
@@ -27,12 +27,12 @@ export function usePokemonListing(pageSize: number) {
     error: null,
     current_request: null,
     status: 'none',
-    pageSize: 20,
-    page: 1,
+    pageSize,
+    page: page,
   });
 
   useEffect(() => {
-    if (pageSize === currentState.pageSize) {
+    if (pageSize === currentState.pageSize && page === currentState.page) {
       return;
     }
 
@@ -40,10 +40,10 @@ export function usePokemonListing(pageSize: number) {
       ...state,
       status: 'none',
       pageSize: pageSize,
-      page: 1,
+      page: page,
       error: null,
     }));
-  }, [pageSize, currentState]);
+  }, [pageSize, page, currentState]);
 
   useEffect(() => {
     if (currentState.status !== 'none') {
@@ -118,35 +118,12 @@ export function usePokemonListing(pageSize: number) {
     })();
   }, [currentState]);
 
-  const goToPage = useCallback(
-    (page: number | ((current: number) => number)) => {
-      setCurrentState((state) => ({
-        ...state,
-        status: 'none',
-        error: null,
-        page: typeof page === 'number' ? page : page(state.page),
-      }));
-    },
-    []
-  );
-
-  const nextPage = useCallback(() => {
-    goToPage((current) => current + 1);
-  }, [goToPage]);
-
-  const prevPage = useCallback(() => {
-    goToPage((current) => current - 1);
-  }, [goToPage]);
-
   return {
-    nextPage,
-    prevPage,
-    goToPage,
     pageCount: data?.count
       ? Math.ceil(data.count / currentState.pageSize)
       : null,
     data: data?.results ?? [],
-    ...currentState,
     offset: (currentState.page - 1) * currentState.pageSize,
+    ...currentState,
   };
 }

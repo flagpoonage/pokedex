@@ -6,8 +6,10 @@ import {
   RouterProvider,
   createRoutesFromElements,
   Route,
+  Navigate,
 } from 'react-router-dom';
-import { PokemonView } from '@pkdx-components/dev/Pokemon';
+import { PokemonDetailsPage } from '@pkdx-components/Pages/PokemonPage';
+import { PokemonListPage } from '@pkdx-components/Pages/PokemonListPage';
 
 function getRootElement() {
   const existing_el = document.getElementById('root');
@@ -25,7 +27,10 @@ function getRootElement() {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path="/pokemon/:pokemon_name" element={<PokemonView />} />
+      <Route path="/" element={<Navigate to={'/pokemon-list/1'} />} />
+      <Route path="/pokemon/:pokemon_name" element={<PokemonDetailsPage />} />
+      <Route path="/pokemon-list/:page_number" element={<PokemonListPage />} />
+      <Route path="*" element={<Navigate to={'/pokemon-list/1'} />} />
     </Route>
   )
 );
