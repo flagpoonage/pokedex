@@ -116,7 +116,7 @@ export function useCachedResource<T>(
         refresh();
       }
     }
-  }, [id, refresh]);
+  }, [id, refresh, cache]);
 
   if (!data.data) {
     return {

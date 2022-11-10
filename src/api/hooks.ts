@@ -1,5 +1,5 @@
 import { UnexpectedDataError } from '@pkdx-utils/errors';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getPokemonListingUrl } from './endpoints';
 import { PaginationResult, isPaginationResult } from './models/Pagination';
 import {
