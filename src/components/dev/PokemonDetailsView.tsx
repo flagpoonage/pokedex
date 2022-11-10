@@ -8,6 +8,7 @@ import {
 } from '@pkdx-components/CacheViews';
 import { PokemonAbilitiesView } from './PokemonAbilitiesView';
 import { PokemonTypesView } from './PokemenTypesView';
+import { PokemonImageView } from './PokemonImageView';
 
 export function PokemonDetailsView({
   value: pokemon,
@@ -21,6 +22,7 @@ export function PokemonDetailsView({
         >
           <div>Loading species name</div>
         </CachedSpeciesView>
+        <PokemonImageView />
         <PokemonTypesView />
         <PokemonAbilitiesView />
 
