@@ -55,7 +55,7 @@ type UseCachedResourceResultError = {
   error: Error;
 };
 
-type UseCachedResourceResultLoading<T> = {
+type UseCachedResourceResultLoading = {
   state: 'loading';
 };
 
@@ -66,7 +66,7 @@ type UseCachedResourceResultData<T> = {
 
 export type UseCachedResourceResult<T> = (
   | UseCachedResourceResultError
-  | UseCachedResourceResultLoading<T>
+  | UseCachedResourceResultLoading
   | UseCachedResourceResultData<T>
 ) & {
   refresh: () => void;
