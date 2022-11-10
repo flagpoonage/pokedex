@@ -1,5 +1,6 @@
 import { UseCachedResourceResult } from '@pkdx-api/cache';
 import {
+  useCachedAbility,
   useCachedPokemon,
   useCachedSpecies,
   useCachedType,
@@ -70,3 +71,4 @@ export function createCacheView<T>(
 export const CachedPokemonView = createCacheView(useCachedPokemon);
 export const CachedSpeciesView = createCacheView(useCachedSpecies);
 export const CachedTypeView = createCacheView(useCachedType);
+export const CachedAbilityView = createCacheView(useCachedAbility);

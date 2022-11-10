@@ -1,13 +1,13 @@
 import React from 'react';
-import { PokemonTypesView } from './PokemenTypesView';
 import { PokemonContextProvider } from '@pkdx-components/PokemonContext';
-import { PokemonSpeciesView } from './PokemonSpeciesView';
 import { PokemonSpeciesNameView } from './PokemonSpeciesNameView';
 import { Pokemon } from '@pkdx-api/models/Pokemon/Pokemon';
 import {
   CachedSpeciesView,
   CacheViewReceiveProps,
 } from '@pkdx-components/CacheViews';
+import { PokemonAbilitiesView } from './PokemonAbilitiesView';
+import { PokemonTypesView } from './PokemenTypesView';
 
 export function PokemonDetailsView({
   value: pokemon,
@@ -21,10 +21,12 @@ export function PokemonDetailsView({
         >
           <div>Loading species name</div>
         </CachedSpeciesView>
-
-        <div>{JSON.stringify(pokemon, null, 2)}</div>
         <PokemonTypesView />
-        <PokemonSpeciesView />
+        <PokemonAbilitiesView />
+
+        {/* <div>{JSON.stringify(pokemon, null, 2)}</div> */}
+        {/* <PokemonTypesView />
+        <PokemonSpeciesView /> */}
       </div>
     </PokemonContextProvider>
   );

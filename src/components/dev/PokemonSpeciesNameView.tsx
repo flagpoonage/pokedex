@@ -8,5 +8,9 @@ export function PokemonSpeciesNameView({
   // Could use a global language context here.
   const en = species.names.find((a) => a.language.name === 'en');
   const en_name = en?.name ?? species.name;
-  return <h1>{en_name}</h1>;
+  return (
+    <div className="dev-box">
+      <h1>{en_name}</h1>
+    </div>
+  );
 }

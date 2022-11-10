@@ -9,7 +9,8 @@ import {
 export function PokemonTypesView() {
   const pokemon = usePokemonContext();
   return (
-    <div>
+    <div className="dev-box">
+      <h2>Types</h2>
       {pokemon.types.map((typeresource) => (
         <CachedTypeView
           name={typeresource.type.name}
