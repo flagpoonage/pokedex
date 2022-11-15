@@ -16,7 +16,7 @@ export function Pagination({
   onSelectPage,
   currentPage,
   pageCount,
-  displayCount = 7,
+  displayCount = 5,
 }: Props) {
   const pagesEitherSide = Math.floor(displayCount / 2);
 
@@ -50,13 +50,20 @@ export function Pagination({
 
   return (
     <div className={styles.container}>
-      <button onClick={() => onSelectPage(1)}>{'<<'}</button>
-      <button disabled={currentPage <= 1} onClick={onPrevPage}>
+      <button className={styles.button} onClick={() => onSelectPage(1)}>
+        {'<<'}
+      </button>
+      <button
+        className={styles.button}
+        disabled={currentPage <= 1}
+        onClick={onPrevPage}
+      >
         {'<'}
       </button>
       {start > 1 && '...'}
       {pages.map((a) => (
         <button
+          className={styles.button}
           onClick={handleSelectPage}
           data-pagenumber={a}
           key={`page_${a}`}
@@ -65,10 +72,16 @@ export function Pagination({
         </button>
       ))}
       {pages[pages.length - 1] < pageCount && '...'}
-      <button disabled={pageCount <= currentPage} onClick={onNextPage}>
+      <button
+        className={styles.button}
+        disabled={pageCount <= currentPage}
+        onClick={onNextPage}
+      >
         {'>'}
       </button>
-      <button onClick={() => onSelectPage(pageCount)}>{'>>'}</button>
+      <button className={styles.button} onClick={() => onSelectPage(pageCount)}>
+        {'>>'}
+      </button>
     </div>
   );
 }

@@ -1,4 +1,9 @@
 .perPageContainer {
+  padding: 1rem;
+}
+
+.perPageContainer select {
+  margin-left: 1rem;
 }
 
 .listing {

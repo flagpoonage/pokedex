@@ -1,2 +1,16 @@
 .container {
+  display: flex;
+  padding: 1rem;
+}
+
+.button {
+  flex: 0 0 auto;
+  background-color: var(--clr-h1);
+  color: white;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.1rem;
+  border: none;
+  display: block;
+  max-width: 3rem;
 }
