@@ -26,6 +26,12 @@ export interface ResourceWithNames {
   names: Name[];
 }
 
+export function getEnglishName(resource: ResourceWithNames, fallback?: string) {
+  return (
+    resource.names.find((a) => a.language.name === 'en')?.name ?? fallback ?? ''
+  );
+}
+
 /**
  * A type not specified in the API but inherited by many other types
  * which contains a list of their descriptions in different languages.

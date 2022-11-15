@@ -1,4 +1,8 @@
 :root {
   --size: 1rem;
   --line-height: 1.2rem;
+  --clr-primary: #004272;
+  --clr-h1: #0166b0;
+  --clr-light: #e0f2ff;
+  --clr-trim: #0093ff;
 }

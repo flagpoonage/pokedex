@@ -9,6 +9,10 @@ import {
 import { PokemonAbilitiesView } from './PokemonAbilitiesView';
 import { PokemonTypesView } from './PokemenTypesView';
 import { PokemonImageView } from './PokemonImageView';
+import { PokemonBasicAttributesView } from './PokemonBasicAttributesView';
+import { PokemonGrowthRateView } from './PokemonGrowthRateView';
+import { PokemonMovesView } from './PokemonMovesView';
+import { PokemonTitle } from './PokemonTitle';
 
 export function PokemonDetailsView({
   value: pokemon,
@@ -18,17 +22,27 @@ export function PokemonDetailsView({
       <div>
         <CachedSpeciesView
           name={pokemon.species.name}
-          component={PokemonSpeciesNameView}
-        >
-          <div>Loading species name</div>
-        </CachedSpeciesView>
+          component={PokemonTitle}
+        />
+        <div className="dev-box">
+          <CachedSpeciesView
+            name={pokemon.species.name}
+            component={PokemonSpeciesNameView}
+          >
+            <h1>Loading...</h1>
+          </CachedSpeciesView>
+        </div>
         <PokemonImageView />
         <PokemonTypesView />
+        <PokemonBasicAttributesView />
         <PokemonAbilitiesView />
-
-        {/* <div>{JSON.stringify(pokemon, null, 2)}</div> */}
-        {/* <PokemonTypesView />
-        <PokemonSpeciesView /> */}
+        <PokemonMovesView />
+        <CachedSpeciesView
+          name={pokemon.species.name}
+          component={PokemonGrowthRateView}
+        >
+          <div>Loading species data</div>
+        </CachedSpeciesView>
       </div>
     </PokemonContextProvider>
   );

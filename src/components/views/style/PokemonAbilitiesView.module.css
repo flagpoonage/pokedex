@@ -1,0 +1,32 @@
+.ability {
+  margin: 1rem 0;
+}
+
+.ability + .ability {
+  border-top: solid 1px var(--clr-light);
+  padding-top: 1rem;
+}
+
+.nameContainer {
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.hidden {
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  color: var(--clr-trim);
+  border: solid 1px var(--clr-trim);
+  padding: 0.1rem 0.3rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.effect {
+  font-size: 0.9rem;
+}

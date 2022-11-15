@@ -54,7 +54,7 @@ export interface Move extends BaseResource, ResourceWithNames {
   /**
    * The type of damage the move inflicts on the target, e.g. physical.
    */
-  damage_class: MoveDamageClass;
+  damage_class: NamedAPIResource;
   /**
    * The effect of this move listed in different languages.
    */

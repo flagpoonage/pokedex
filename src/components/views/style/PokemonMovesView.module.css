@@ -1,0 +1,48 @@
+.move {
+  margin: 1rem 0;
+}
+
+.move + .move {
+  border-top: solid 1px var(--clr-light);
+  padding-top: 1rem;
+}
+
+.nameContainer {
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.damageClass {
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  color: var(--clr-trim);
+  border: solid 1px var(--clr-trim);
+  padding: 0.1rem 0.3rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.effect {
+  font-size: 0.9rem;
+}
+
+.moveStats {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.accuracy,
+.power,
+.pp {
+  flex: 1 1 0;
+}
+
+.accuracy {
+  max-width: 10rem;
+}

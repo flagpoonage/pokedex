@@ -1,0 +1,17 @@
+.header {
+  font-family: 'Jockey One', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+
+.link {
+  font-size: 1rem;
+  color: black;
+}

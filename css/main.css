@@ -4,6 +4,8 @@ body {
   height: 100%;
   font-size: 18px;
   font-family: sans-serif;
+  line-height: 1.2rem;
+  color: #333;
 }
 
 #root {
@@ -14,7 +16,24 @@ body {
 
 .dev-box {
   /* For development use only */
-  margin: 1rem;
   padding: 1rem;
-  border: solid 1px blue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Jockey One', sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--clr-h1);
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--clr-primary);
+  margin-bottom: 0.75rem;
 }

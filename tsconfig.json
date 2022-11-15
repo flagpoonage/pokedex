@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -13,11 +14,12 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./",
+
     "paths": {
       "@pkdx-utils/*": ["src/utils/*"],
       "@pkdx-components/*": ["src/components/*"],
       "@pkdx-api/*": ["src/api/*"]
     }
   },
-  "include": ["./src", "./tests"]
+  "include": ["./src", "./tests", "index.d.ts"]
 }

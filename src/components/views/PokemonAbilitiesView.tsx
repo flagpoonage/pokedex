@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './style/PokemonAbilitiesView.module.css';
 import { usePokemonContext } from '@pkdx-components/PokemonContext';
 import {
   CachedAbilityView,
@@ -28,12 +29,29 @@ export function PokemonAbilitiesView() {
 export function PokemonAbilityView({
   value: ability,
 }: CacheViewReceiveProps<Ability>) {
-  const en_name = ability.names.find((a) => a.language.name === 'en');
-  const name = en_name?.name ?? ability.name;
+  const pokemon = usePokemonContext();
+  const pokemonAbility = pokemon.abilities.find(
+    (a) => a.ability.name === ability.name
+  );
+
+  const name = (ability.names.find((a) => a.language.name === 'en') ?? ability)
+    .name;
+  const effect =
+    (
+      ability.effect_entries.find((a) => a.language.name === 'en') ??
+      ability.effect_entries[0]
+    )?.effect ?? '-';
+
   return (
-    <div>
-      <span>{name}</span>
-      <div>{ability.flavor_text_entries[0].flavor_text}</div>
+    <div className={styles.ability}>
+      <div className={styles.nameContainer}>
+        <span className={styles.name}>{name}</span>
+        {pokemonAbility?.is_hidden && (
+          <span className={styles.hidden}>Hidden</span>
+        )}
+      </div>
+
+      <div className={styles.effect}>{effect}</div>
     </div>
   );
 }

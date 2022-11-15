@@ -1,0 +1,17 @@
+.scale {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--clr-light);
+}
+
+.track {
+  background-color: var(--clr-trim);
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  transition: width ease-out 0.25s;
+  width: 0;
+}

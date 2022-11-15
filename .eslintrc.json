@@ -32,6 +32,12 @@
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
       }
+    },
+    {
+      "files": ["index.d.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
     }
   ],
   "parser": "@typescript-eslint/parser",

@@ -1,10 +1,13 @@
 import { UseCachedResourceResult } from '@pkdx-api/cache';
+import { useCachedMove } from '@pkdx-api/caches/MoveCache';
 import {
   useCachedAbility,
+  useCachedGrowthRate,
   useCachedPokemon,
   useCachedSpecies,
   useCachedType,
 } from '@pkdx-api/caches/PokemonCache';
+import { PokemonFetchError } from '@pkdx-utils/errors';
 import React, { ReactElement } from 'react';
 
 export interface CacheViewProps<T> {
@@ -32,6 +35,9 @@ export function CacheView<T>({
 
 const defaultError = (e: Error) => <DefaultCacheError error={e} />;
 function DefaultCacheError({ error }: { error: Error }) {
+  if (error instanceof PokemonFetchError) {
+    return <div>{error.formattedErrorMessage}</div>;
+  }
   return <div>Error: {error.message}</div>;
 }
 
@@ -39,10 +45,11 @@ export interface CacheViewReceiveProps<T> {
   value: T;
 }
 
-interface GeneratedCacheViewProps<T>
-  extends Pick<CacheViewProps<T>, 'errorComponent'> {
+interface GeneratedCacheViewProps<T> {
   name: string;
-  component: (props: CacheViewReceiveProps<T>) => ReactElement;
+  fallbackToChildren?: boolean;
+  component: (props: CacheViewReceiveProps<T>) => ReactElement | null;
+  errorComponent?: (props: { error: Error }) => ReactElement | null;
 }
 
 export function createCacheView<T>(
@@ -52,14 +59,22 @@ export function createCacheView<T>(
     name,
     component,
     children,
+    fallbackToChildren,
     errorComponent,
   }: React.PropsWithChildren<GeneratedCacheViewProps<T>>): ReactElement {
     const cache = useCacheHook(name);
     const RenderComponent = component;
+    const ErrorComponent = errorComponent;
     return (
       <CacheView
         cache={cache}
-        errorComponent={errorComponent}
+        errorComponent={
+          fallbackToChildren
+            ? () => <>{children}</>
+            : ErrorComponent
+            ? (v) => <ErrorComponent error={v} />
+            : undefined
+        }
         render={(v) => <RenderComponent value={v} />}
       >
         {children}
@@ -72,3 +87,5 @@ export const CachedPokemonView = createCacheView(useCachedPokemon);
 export const CachedSpeciesView = createCacheView(useCachedSpecies);
 export const CachedTypeView = createCacheView(useCachedType);
 export const CachedAbilityView = createCacheView(useCachedAbility);
+export const CachedGrowthRateView = createCacheView(useCachedGrowthRate);
+export const CachedMoveView = createCacheView(useCachedMove);

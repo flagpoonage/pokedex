@@ -8,8 +8,8 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import { PokemonDetailsPage } from '@pkdx-components/Pages/PokemonPage';
-import { PokemonListPage } from '@pkdx-components/Pages/PokemonListPage';
+import { PokemonDetailsPage } from '@pkdx-components/pages/PokemonPage';
+import { PokemonListPage } from '@pkdx-components/pages/PokemonListPage';
 
 function getRootElement() {
   const existing_el = document.getElementById('root');

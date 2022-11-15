@@ -15,3 +15,5 @@ export const getPokemonDetailsUrl = url('pokemon');
 export const getAbilityDetailsUrl = url('ability');
 export const getItemDetailsUrl = url('item');
 export const getSpeciesDetailsUrl = url('pokemon-species');
+export const getGrowthRateDetailsUrl = url('growth-rate');
+export const getMoveDetailsUrl = url('move');

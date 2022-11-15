@@ -1,3 +1,4 @@
+import { PokemonFetchError } from '@pkdx-utils/errors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export class PokemonAPICache<T> {
@@ -33,7 +34,13 @@ export class PokemonAPICache<T> {
 
   private async query(id: string): Promise<T> {
     try {
-      const result = await fetch(this._urlGenerator(id));
+      const url = this._urlGenerator(id);
+      const result = await fetch(url);
+
+      if (result.status >= 400) {
+        throw new PokemonFetchError(url, result);
+      }
+
       const json = await result.json();
 
       this._items.set(id, json);
